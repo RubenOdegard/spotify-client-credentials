@@ -1,3 +1,5 @@
+// @/types/SpotifyAlbumData.ts
+
 interface ExternalUrls {
   spotify: string;
 }
@@ -26,7 +28,7 @@ interface Restrictions {
   reason: string;
 }
 
-interface Album {
+export interface AlbumData {
   album_type: string;
   total_tracks: number;
   available_markets: string[];
@@ -44,14 +46,12 @@ interface Album {
   album_group: string;
 }
 
-interface SpotifyAlbumData {
+export interface SpotifyAlbumData {
   href: string;
   limit: number;
   next: string;
   offset: number;
   previous: string;
   total: number;
-  items: Album[];
+  items: AlbumData[];
 }
-
-export default SpotifyAlbumData;

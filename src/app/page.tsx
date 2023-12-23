@@ -1,11 +1,11 @@
-import SpotifyArtistInfo from "@/components/spotify-artist-info";
+import ModuleArtistAlbums from "@/components/module-artist-albums";
 
 const Home = () => {
   return (
     <div>
       <h1>Spotify Artist Info</h1>
 
-      <SpotifyArtistInfo />
+      <ModuleArtistAlbums />
     </div>
   );
 };

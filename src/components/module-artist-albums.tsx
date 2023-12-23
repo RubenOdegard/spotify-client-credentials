@@ -1,11 +1,13 @@
 "use client";
 
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Image from "next/image";
 
-const SpotifyArtistInfo = () => {
-  const [artistData, setArtistData] = useState(null);
+import { AlbumData, SpotifyAlbumData } from "@/types/SpotifyAlbumData";
+
+const ModuleArtistAlbums = () => {
+  const [albumData, setAlbumData] = useState<SpotifyAlbumData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,9 +16,9 @@ const SpotifyArtistInfo = () => {
         const response = await axios.get("/api/spotify");
         const data = response.data;
 
-        setArtistData(data.artistData);
+        setAlbumData(data.artistData);
       } catch (error) {
-        console.error("Error fetching artist data:", error.message);
+        console.error("Error fetching album data:", error.message);
       }
     };
 
@@ -26,30 +28,30 @@ const SpotifyArtistInfo = () => {
 
   return (
     <div className="p-4">
-      {artistData
+      {albumData
         ? (
           <div className="">
             <h2 className="py-6">Artist album data:</h2>
-            <div className="flex flex-col gap-4">
-              {artistData.items.map((artist) => (
+            <div className="flex flex-wrap gap-4">
+              {albumData.items.map((album: AlbumData) => (
                 <div
-                  key={artist.id}
+                  key={album.id}
                   className="flex flex-col rounded-lg bg-gray-900 p-4"
                 >
-                  <div>ID: {artist.id}</div>
-                  <div>Album name: {artist.name}</div>
-                  <div>Image: {JSON.stringify(artist.images[0])}</div>
                   <Image
-                    src={artist.images[0].url}
+                    src={album.images[0].url}
                     alt=""
-                    height={artist.images[0].height}
-                    width={artist.images[0].width}
+                    height={album.images[0].height}
+                    width={album.images[0].width}
                     className="aspect-square max-w-xs"
                   />
+                  <div>{album.name}</div>
+                  <div>{album.release_date}</div>
+                  <div>{album.total_tracks}</div>
                 </div>
               ))}
             </div>
-            <pre>{JSON.stringify(artistData, null, 2)}</pre>
+            <pre>{JSON.stringify(albumData, null, 2)}</pre>
           </div>
         )
         : <p>Loading...</p>}
@@ -57,4 +59,4 @@ const SpotifyArtistInfo = () => {
   );
 };
 
-export default SpotifyArtistInfo;
+export default ModuleArtistAlbums;
