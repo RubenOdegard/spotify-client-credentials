@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useSpotifyAlbumData = () => {
+const useSpotifyAlbumData = (url) => {
   const [albumData, setAlbumData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ const useSpotifyAlbumData = () => {
     const fetchData = async () => {
       try {
         axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-        const response = await axios.get("/api/spotify");
+        const response = await axios.get(`/api/spotify/albums?url=${url}`);
         const data = response.data;
 
         setAlbumData(data.artistData);
@@ -24,7 +24,7 @@ const useSpotifyAlbumData = () => {
 
     // Fetch data when the hook is called
     fetchData();
-  }, []);
+  }, [url]);
 
   return { albumData, loading, error };
 };

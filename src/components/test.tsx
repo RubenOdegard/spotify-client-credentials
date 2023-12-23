@@ -6,7 +6,9 @@ import Image from "next/image";
 import getSpotifyAlbumData from "@/hooks/getSpotifyAlbumsData";
 
 const ModuleArtistAlbums = () => {
-  const { albumData, loading, error } = getSpotifyAlbumData();
+  const dynamicUrl =
+    "https://api.spotify.com/v1/artists/6t68J5tK71gdrfHJcusX9t/albums";
+  const { albumData, loading, error } = getSpotifyAlbumData(dynamicUrl);
 
   if (loading) {
     return <p>Loading...</p>;
