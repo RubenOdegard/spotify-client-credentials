@@ -1,9 +1,8 @@
 // @/hooks/useSpotifyAlbumData.js
 import { useEffect, useState } from "react";
 import axios from "axios";
-import type  
 
-const getAlbums = () => {
+const useSpotifyAlbumData = () => {
   const [albumData, setAlbumData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +15,7 @@ const getAlbums = () => {
         const data = response.data;
 
         setAlbumData(data.artistData);
-      } catch (error) { 
+      } catch (error) {
         setError(`Error fetching album data: ${error.message}`);
       } finally {
         setLoading(false);
@@ -30,4 +29,4 @@ const getAlbums = () => {
   return { albumData, loading, error };
 };
 
-export default getAlbums;
+export default useSpotifyAlbumData;

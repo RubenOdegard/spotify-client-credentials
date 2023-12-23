@@ -1,4 +1,4 @@
-import ModuleArtistAlbums from "@/components/module-artist-albums";
+import ModuleArtistAlbums from "@/components/ModuleArtistAlbums";
 
 const Home = () => {
   return (
