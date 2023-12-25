@@ -3,10 +3,10 @@
 // Your ModuleArtistAlbums component
 import React from "react";
 import Image from "next/image";
-import getSpotifyAlbumData from "@/hooks/getSpotifyAlbumsData";
+import useSpotifyAlbumData from "@/hooks/getSpotifyAlbumData";
 
 const ModuleArtistAlbums = () => {
-  const { albumData, loading, error } = getSpotifyAlbumData();
+  const { albumData, loading, error } = useSpotifyAlbumData();
 
   if (loading) {
     return <p>Loading...</p>;
