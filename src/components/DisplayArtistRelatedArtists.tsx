@@ -28,10 +28,10 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
           <>
             <h2 className="mb-1">Related Artists</h2>
             <div className="flex flex-row overflow-x-scroll gap-2 snap snap-x snap-mandatory ">
-              {artistRelatedArtists.artistData.artists.map((artist) => (
+              {artistRelatedArtists.artistData?.artists?.map((artist) => (
                 <div
                   key={artist.id}
-                  className="flex flex-col rounded-lg bg-emerald-950 p-4 w-5/6 snap-center text-center gap-y-1"
+                  className="flex flex-col rounded-lg bg-emerald-950 p-4 w-[140px] justify-center items-center snap-center text-center gap-y-1 "
                 >
                   <div className="h-24 w-24 relative">
                     <Image
@@ -46,7 +46,9 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
                     </p>
                   </div>
 
-                  <p className="text-xs text-emerald-300">{artist.name}</p>
+                  <p className="text-xs text-emerald-300 truncate max-w-[15ch]">
+                    {artist.name}
+                  </p>
                   {/* <p className="truncate">{artist.href}</p>*/}
                   <p className="text-xs">{artist.popularity}</p>
                 </div>

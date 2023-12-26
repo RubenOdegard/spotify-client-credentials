@@ -17,11 +17,14 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
   }
 
   return (
-    <div className="col-span-3 col-start-8 col-end-13 row-start-1 row-end-1 ">
+    <div className=" col-start-9 col-end-13 row-start-1 row-end-1 relative ">
+      <h2 className="mb-1">Albums</h2>
+
+      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent absolute bottom-0 z-40 " />
       {albumData
         ? (
-          <div className="grid grid-cols-6 gap-2 justify-items-center overflow-y-scroll h-[335px]">
-            {albumData.items.map((album: AlbumData) => (
+          <div className="grid grid-cols-3 gap-2 justify-items-center overflow-y-scroll h-[400px] pb-12">
+            {albumData.items?.map((album: AlbumData) => (
               <div
                 key={album.id}
                 className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative"
@@ -35,11 +38,11 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
                     className="aspect-square rounded-md"
                   />
                   <div className="text-[0.6em] bg-emerald-800 border border-emerald-500 rounded-md p-1 absolute bottom-1 right-1">
-                    {album.total_tracks}
+                    Total tracks: {album.total_tracks}
                   </div>
                 </div>
 
-                <div className="text-xs text-center my-2 text-emerald-300 mx-1">
+                <div className="text-xs text-center my-2 text-emerald-300 mx-2 truncate font-semibold">
                   {album.name}
                 </div>
               </div>

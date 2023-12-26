@@ -27,13 +27,16 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
   };
 
   // Slice the array to get only the first 6 tracks
-  const displayedTracks = artistTopTracks?.artistData.tracks.slice(0, 6) || [];
+  const displayedTracks = artistTopTracks?.artistData?.tracks?.slice(0, 12) ||
+    [];
 
   return (
-    <div className="col-span-3 col-start-4 col-end-8 row-start-1 row-end-1  h-[325px]  ">
+    <div className="col-span-3 col-start-5 col-end-9 row-start-1 row-end-1  h-[400px]  relative">
+      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent absolute -bottom-7 z-40 " />
+      <h2 className="mb-1">Top Tracks</h2>
       {displayedTracks.length > 0
         ? (
-          <div className="grid grid-cols-3 grid-flow-auto gap-2 justify-items-center">
+          <div className="grid grid-cols-3 gap-2 justify-items-center overflow-y-scroll h-[400px] pb-12">
             {displayedTracks.map((track) => (
               <div
                 key={track.id}
@@ -47,12 +50,12 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
                     width={track.album.images[0].width}
                     className="aspect-square rounded-md"
                   />
-                  <p className="text-[0.6em] bg-emerald-800 border border-emerald-500 rounded-md p-1 absolute bottom-1 right-1">
+                  <p className="text-[0.6em] bg-emerald-800 border border-emerald-500 rounded-md p-1 absolute bottom-1 right-1 ">
                     {formatDuration(track.duration_ms)}
                   </p>
                 </div>
 
-                <p className="text-xs text-center my-2 text-emerald-300">
+                <p className="text-xs text-center my-2 text-emerald-300 mx-2 truncate font-semibold">
                   {track.name}
                 </p>
                 {
@@ -63,7 +66,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
             ))}
           </div>
         )
-        : <p>No album data available</p>}
+        : <p>No top tracks data available</p>}
     </div>
   );
 };

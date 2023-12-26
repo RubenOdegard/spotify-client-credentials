@@ -5,14 +5,16 @@ import DisplayArtistRelatedArtists from "@/components/DisplayArtistRelatedArtist
 import DisplayArtistTopTracks from "@/components/DisplayArtistTopTracks";
 import DisplayTrackAudioFeatues from "@/components/DisplayTrackAudioFeatures";
 
+const artistID = "3PgCoKtxkxF046P2FM7SFE";
+
 const Home = () => {
   return (
-    <div className="max-w-7xl flex items-center mx-auto min-h-[100dvh] max-h-[100dvh]  ">
+    <div className="px-24 flex items-center mx-auto min-h-[100dvh] max-h-[100dvh]  ">
       <div className="grid grid-cols-12  rounded-xl p-2 gap-x-4 gap-y-1">
-        <DisplayArtist artistID="60a2bBHgTEfBJxFeJykcbD" />
-        <DisplayArtistRelatedArtists artistID="60a2bBHgTEfBJxFeJykcbD" />
-        <DisplayArtistTopTracks artistID="60a2bBHgTEfBJxFeJykcbD" />
-        <DisplayArtistAlbums artistID="60a2bBHgTEfBJxFeJykcbD" />
+        <DisplayArtist artistID={artistID} />
+        <DisplayArtistRelatedArtists artistID={artistID} />
+        <DisplayArtistTopTracks artistID={artistID} />
+        <DisplayArtistAlbums artistID={artistID} />
       </div>
     </div>
   );
