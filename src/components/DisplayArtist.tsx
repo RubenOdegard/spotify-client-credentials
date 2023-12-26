@@ -21,7 +21,7 @@ const DisplayArtist = ({ artistID }: { artistID: string }) => {
       {artistData
         ? (
           <>
-            <h2 className="font-bold">{artistData.artistData.name}</h2>
+            <h2 className="font-bold text-xl">{artistData.artistData.name}</h2>
             <div className="flex flex-row gap-4 ">
               <div className="flex flex-col rounded-md bg-emerald-900 w-full">
                 {

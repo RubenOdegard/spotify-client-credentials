@@ -5,7 +5,7 @@ import DisplayArtistRelatedArtists from "@/components/DisplayArtistRelatedArtist
 import DisplayArtistTopTracks from "@/components/DisplayArtistTopTracks";
 import DisplayTrackAudioFeatues from "@/components/DisplayTrackAudioFeatures";
 
-const artistID = "3PgCoKtxkxF046P2FM7SFE";
+const artistID = "3RYYha3CC7js2PHbcBHewt";
 
 const Home = () => {
   return (

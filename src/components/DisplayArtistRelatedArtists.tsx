@@ -1,10 +1,12 @@
 "use client";
 
 import getSpotifyArtistRelatedArtists from "@/hooks/getSpotifyArtistRelatedArtists";
+import { Progress } from "@/components/ui/progress";
 
 // need to import types
 
 import Image from "next/image";
+import { FlameIcon } from "lucide-react";
 
 const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
   const dynamicUrl =
@@ -27,7 +29,7 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
         ? (
           <>
             <h2 className="mb-1">Related Artists</h2>
-            <div className="flex flex-row overflow-x-scroll gap-2 snap snap-x snap-mandatory ">
+            <div className="flex flex-row overflow-x-scroll gap-2 snap snap-x snap-mandatory relative">
               {artistRelatedArtists.artistData?.artists?.map((artist) => (
                 <div
                   key={artist.id}
@@ -50,7 +52,13 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
                     {artist.name}
                   </p>
                   {/* <p className="truncate">{artist.href}</p>*/}
-                  <p className="text-xs">{artist.popularity}</p>
+                  <div className=" flex gap-1 w-full justify-center items-center relative mt-2">
+                    <FlameIcon
+                      size={14}
+                      className="absolute -top-[3px]  right-1/2 translate-x-1/2 p-0.5 bg-emerald-700 text-emerald-300 fill-emerald-500 rounded-full z-40 border border-emerald-900/10"
+                    />{" "}
+                    <Progress value={artist.popularity} />
+                  </div>
                 </div>
               ))}
             </div>

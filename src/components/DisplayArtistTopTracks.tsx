@@ -32,11 +32,11 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
 
   return (
     <div className="col-span-3 col-start-5 col-end-9 row-start-1 row-end-1  h-[400px]  relative">
-      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent absolute -bottom-7 z-40 " />
+      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute -bottom-7 z-40 " />
       <h2 className="mb-1">Top Tracks</h2>
       {displayedTracks.length > 0
         ? (
-          <div className="grid grid-cols-3 gap-2 justify-items-center overflow-y-scroll h-[400px] pb-12">
+          <div className="grid grid-cols-3 gap-2 justify-items-center overflow-y-scroll h-[400px] pb-6">
             {displayedTracks.map((track) => (
               <div
                 key={track.id}
@@ -55,7 +55,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
                   </p>
                 </div>
 
-                <p className="text-xs text-center my-2 text-emerald-300 mx-2 truncate font-semibold">
+                <p className="text-xs text-center my-2 text-emerald-300 mx-2 truncate ">
                   {track.name}
                 </p>
                 {
