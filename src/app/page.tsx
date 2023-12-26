@@ -7,14 +7,13 @@ import DisplayTrackAudioFeatues from "@/components/DisplayTrackAudioFeatures";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Spotify Artist Info</h1>
-      <DisplayTrackAudioFeatues trackID="2COo50CZFFHNkQNa6ta3q7" />
-      <DisplayArtistRelatedArtists artistID="60a2bBHgTEfBJxFeJykcbD" />
-      <DisplayArtistTopTracks artistID="60a2bBHgTEfBJxFeJykcbD" />
-      <DisplayArtist artistID="60a2bBHgTEfBJxFeJykcbD" />
-      <DisplayAlbumTracks albumID="46KxFs8Yte7AI01p9yvzWZ" />
-      <DisplayArtistAlbums artistID="60a2bBHgTEfBJxFeJykcbD" />
+    <div className="max-w-7xl flex items-center mx-auto min-h-[100dvh] max-h-[100dvh]  ">
+      <div className="grid grid-cols-12  rounded-xl p-2 gap-x-4 gap-y-1">
+        <DisplayArtist artistID="60a2bBHgTEfBJxFeJykcbD" />
+        <DisplayArtistRelatedArtists artistID="60a2bBHgTEfBJxFeJykcbD" />
+        <DisplayArtistTopTracks artistID="60a2bBHgTEfBJxFeJykcbD" />
+        <DisplayArtistAlbums artistID="60a2bBHgTEfBJxFeJykcbD" />
+      </div>
     </div>
   );
 };

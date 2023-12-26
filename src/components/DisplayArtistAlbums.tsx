@@ -17,31 +17,33 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
   }
 
   return (
-    <div className="p-4 w-full">
+    <div className="col-span-3 col-start-8 col-end-13 row-start-1 row-end-1 ">
       {albumData
         ? (
-          <div className="">
-            <h2>Artist Albums</h2>
-            <div className="flex flex-row overflow-x-scroll gap-4 snap snap-x snap-mandatory ">
-              {albumData.items.map((album: AlbumData) => (
-                <div
-                  key={album.id}
-                  className="flex flex-col rounded-lg bg-gray-900 p-4 w-5/6 snap-center"
-                >
+          <div className="grid grid-cols-6 gap-2 justify-items-center overflow-y-scroll h-[335px]">
+            {albumData.items.map((album: AlbumData) => (
+              <div
+                key={album.id}
+                className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative"
+              >
+                <div className="h-26 w-26 relative">
                   <Image
                     src={album.images[0].url}
                     alt=""
                     height={album.images[0].height}
                     width={album.images[0].width}
-                    className="aspect-square"
+                    className="aspect-square rounded-md"
                   />
-                  <div>ID: {album.id}</div>
-                  <div>Album name: {album.name}</div>
-                  <div>Total tracks: {album.total_tracks}</div>
-                  <div>Release date: {album.release_date}</div>
+                  <div className="text-[0.6em] bg-emerald-800 border border-emerald-500 rounded-md p-1 absolute bottom-1 right-1">
+                    {album.total_tracks}
+                  </div>
                 </div>
-              ))}
-            </div>
+
+                <div className="text-xs text-center my-2 text-emerald-300 mx-1">
+                  {album.name}
+                </div>
+              </div>
+            ))}
           </div>
         )
         : <p>No album data available</p>}

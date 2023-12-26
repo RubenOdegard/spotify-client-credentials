@@ -17,23 +17,29 @@ const DisplayArtist = ({ artistID }: { artistID: string }) => {
   }
 
   return (
-    <div className="p-4 w-full max-w-xs">
+    <div className="w-full col-start-1 col-span-3 row-span-1 ">
       {artistData
         ? (
           <>
-            <h2>Artist</h2>
-            <div className="flex flex-row overflow-x-scroll gap-4 snap snap-x snap-mandatory ">
-              <div className="flex flex-col rounded-lg bg-gray-900 p-4 w-5/6 snap-center">
-                <p>Name: {artistData.artistData.name}</p>
-                <p>Popularity: {artistData.artistData.popularity}</p>
-
-                <Image
-                  src={artistData.artistData.images[0].url}
-                  alt=""
-                  height={artistData.artistData.images[0].height}
-                  width={artistData.artistData.images[0].width}
-                  className="aspect-square"
-                />
+            <div className="flex flex-row gap-4 h-[334px]">
+              <div className="flex flex-col rounded-md bg-emerald-900 w-full">
+                {
+                  /* <p>Popularity: {artistData.artistData.popularity}</p>
+                  */
+                }
+                <div className="relative h-full">
+                  <Image
+                    src={artistData.artistData.images[0].url}
+                    alt=""
+                    height={artistData.artistData.images[0].height}
+                    width={artistData.artistData.images[0].width}
+                    objectFit="cover"
+                    className="h-full shadow-md rounded-md"
+                  />
+                  <h2 className="text-lg font-semibold absolute top-1 left-2">
+                    {artistData.artistData.name}
+                  </h2>
+                </div>
               </div>
             </div>
           </>

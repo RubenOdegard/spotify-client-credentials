@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
-import SpotifyTopTracks from "@/types/SpotifyTopTracks";
 import Image from "next/image";
-
 import getSpotifyArtistTopTracks from "@/hooks/getSpotifyArtistTopTracks";
 
 const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
@@ -23,34 +20,47 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
     return <p>{error}</p>;
   }
 
+  const formatDuration = (duration_ms: number) => {
+    const minutes = Math.floor(duration_ms / 60000);
+    const seconds = ((duration_ms % 60000) / 1000).toFixed(0);
+    return `${minutes}:${+seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
+  // Slice the array to get only the first 6 tracks
+  const displayedTracks = artistTopTracks?.artistData.tracks.slice(0, 6) || [];
+
   return (
-    <div className="p-4 w-full ">
-      {artistTopTracks
+    <div className="col-span-3 col-start-4 col-end-8 row-start-1 row-end-1  h-[325px]  ">
+      {displayedTracks.length > 0
         ? (
-          <div>
-            <h2>Artist Top Tracks</h2>
-            <div className="flex flex-row overflow-x-scroll gap-4 snap snap-x snap-mandatory ">
-              {artistTopTracks?.artistData.tracks.map((track) => (
-                <div
-                  key={track.id}
-                  className="flex flex-col rounded-lg bg-gray-900 p-4 w-5/6 snap-center max-w-xs"
-                >
+          <div className="grid grid-cols-3 grid-flow-auto gap-2 justify-items-center">
+            {displayedTracks.map((track) => (
+              <div
+                key={track.id}
+                className="flex flex-col  rounded-lg bg-emerald-950 w-full snap-center relative "
+              >
+                <div className="h-26 w-26 relative">
                   <Image
                     src={track.album.images[0].url}
                     alt=""
                     height={track.album.images[0].height}
                     width={track.album.images[0].width}
-                    className="aspect-square "
+                    className="aspect-square rounded-md"
                   />
-
-                  <p>Name: {track.name}</p>
-                  <p>Duration: {track.duration_ms} ms</p>
-                  <p>Release date: {track.album.release_date}</p>
-                  <p>Popularity: {track.popularity}</p>
-                  <p className="truncate">href: {track.album.href}</p>
+                  <p className="text-[0.6em] bg-emerald-800 border border-emerald-500 rounded-md p-1 absolute bottom-1 right-1">
+                    {formatDuration(track.duration_ms)}
+                  </p>
                 </div>
-              ))}
-            </div>
+
+                <p className="text-xs text-center my-2 text-emerald-300">
+                  {track.name}
+                </p>
+                {
+                  /*  <p className="absolute top-0">{track.popularity}</p>
+ */
+                }
+              </div>
+            ))}
           </div>
         )
         : <p>No album data available</p>}
