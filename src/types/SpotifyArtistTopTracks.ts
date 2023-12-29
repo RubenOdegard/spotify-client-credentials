@@ -44,7 +44,7 @@ interface ExternalIds {
 
 interface LinkedFrom {}
 
-interface Track {
+export interface Track {
   album: Album;
   artists: Artist[];
   available_markets: string[];
@@ -70,7 +70,9 @@ interface Track {
 }
 
 interface SpotifyTracks {
-  tracks: Track[];
+  artistData: {
+    tracks: Track[];
+  };
 }
 
 export default SpotifyTracks;

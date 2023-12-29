@@ -1,13 +1,13 @@
-interface ExternalUrls {
+export interface ExternalUrls {
   spotify: string;
 }
 
-interface Followers {
-  href: string;
+export interface Followers {
+  href: string | null;
   total: number;
 }
 
-interface Image {
+export interface Image {
   url: string;
   height: number;
   width: number;
@@ -26,8 +26,8 @@ export interface Artist {
   uri: string;
 }
 
-interface SpotifyArtistRelatedArtistData {
-  artists: Artist[];
+export interface SpotifyArtistRelatedArtistData {
+  artistsData: {
+    artists: Artist[];
+  };
 }
-
-export default SpotifyArtistRelatedArtistData;

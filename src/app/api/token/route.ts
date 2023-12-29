@@ -6,8 +6,8 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     // Fetch Spotify credentials
-    const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
+    const clientId = process.env.SPOTIFY_CLIENT_ID;
+    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
     const base64Credentials = Buffer.from(`${clientId}:${clientSecret}`)
       .toString("base64");

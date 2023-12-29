@@ -1,9 +1,10 @@
+import { ArtistProvider } from "@/components/ArtistContext";
+import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
-import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("localhost:3000"),
@@ -27,19 +28,21 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased relative",
+          "min-h-screen bg-gradient-to-bl from-background via-emerald-950 to-background font-sans antialiased relative",
           GeistSans.variable,
           GeistMono.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <ArtistProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ArtistProvider>
       </body>
     </html>
   );

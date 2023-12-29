@@ -1,15 +1,16 @@
 "use client";
 
 import getSpotifyArtist from "@/hooks/getSpotifyArtist";
-import SpotifyArtistData from "@/types/SpotifyArtist";
 import Image from "next/image";
 
 const DisplayArtist = ({ artistID }: { artistID: string }) => {
   const dynamicUrl = `https://api.spotify.com/v1/artists/${artistID}`;
-  const { artistData, loading, error } = getSpotifyArtist(dynamicUrl);
+  const { artistData, loading, error } = getSpotifyArtist(
+    dynamicUrl,
+  );
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="col-span-3">Loading artist...</p>;
   }
 
   if (error) {
@@ -17,24 +18,24 @@ const DisplayArtist = ({ artistID }: { artistID: string }) => {
   }
 
   return (
-    <div className="w-full col-start-1 col-span-4 row-span-1 max-w-[400px]">
+    <div className="w-full col-span-12  lg:col-start-1 lg:col-span-4 row-span-1 max-w-[400px] group">
       {artistData
         ? (
           <>
-            <h2 className="font-bold text-xl">{artistData.artistData.name}</h2>
+            <h2 className="font-bold text-xl mb-4">
+              {artistData.artistData.name}
+            </h2>
             <div className="flex flex-row gap-4 ">
               <div className="flex flex-col rounded-md bg-emerald-900 w-full">
-                {
-                  /* <p>Popularity: {artistData.artistData.popularity}</p>
-                  */
-                }
-                <div className="relative h-full max-h-[410px]">
+                <div className="relative h-full max-h-[410px] overflow-clip">
                   <Image
                     src={artistData.artistData.images[0].url}
                     alt=""
+                    quality={75}
+                    priority={true}
                     height={artistData.artistData.images[0].height}
                     width={artistData.artistData.images[0].width}
-                    className="h-full shadow-md rounded-md "
+                    className="h-full shadow-md rounded-md md:invert-0 md:group-hover:saturate-150 md:group-hover:scale-125 md:group-hover:rotate-12 transition-all duration-1000 ease-out border border-emerald-950"
                   />
                 </div>
               </div>
