@@ -1,18 +1,15 @@
-// pages/api/spotify.js
 import axios from "axios";
 import querystring from "querystring";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    // Fetch Spotify credentials
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
     const base64Credentials = Buffer.from(`${clientId}:${clientSecret}`)
       .toString("base64");
 
-    // Manually encode the payload in URL-encoded format
     const payload = querystring.stringify({
       grant_type: "client_credentials",
     });
@@ -33,9 +30,6 @@ export async function GET() {
     return NextResponse.json({ accessToken });
   } catch (error) {
     console.error("Error fetching access token:", error.message);
-    return NextResponse.error({
-      status: error.response?.status || 500,
-      body: { error: "Internal Server Error" },
-    });
+    return NextResponse.error();
   }
 }

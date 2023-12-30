@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import SpotifyAudioFeatures from "@/types/SpotifyTrackAudioFeatures";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const getSpotifyArtistTopTracks = (url: string) => {
+const getSpotifyAudioFeatures = (url: string) => {
   const [trackAudioFeatures, setTrackAudioFeatures] = useState<
     SpotifyAudioFeatures | null
   >(
@@ -32,4 +32,4 @@ const getSpotifyArtistTopTracks = (url: string) => {
   return { trackAudioFeatures, loading, error };
 };
 
-export default getSpotifyArtistTopTracks;
+export default getSpotifyAudioFeatures;

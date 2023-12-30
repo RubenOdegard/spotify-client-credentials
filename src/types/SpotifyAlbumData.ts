@@ -1,5 +1,3 @@
-// @/types/SpotifyAlbumData.ts
-
 interface ExternalUrls {
   spotify: string;
 }
