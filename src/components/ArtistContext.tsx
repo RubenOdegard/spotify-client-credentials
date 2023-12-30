@@ -17,7 +17,7 @@ export const useArtist = () => {
 };
 
 export const ArtistProvider = ({ children }: { children: ReactNode }) => {
-  const [artistID, setArtistID] = useState("0uzLLwChVbUloexrVV2bxA");
+  const [artistID, setArtistID] = useState("3q7HBObVc0L8jNeTe5Gofh");
   // 1eAyilKA1p82m0SkoEZ8d
 
   const handleRelatedArtistClick = (newArtistID: string) => {

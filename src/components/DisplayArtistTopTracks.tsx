@@ -66,7 +66,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
               />
             </Link>
 
-            <div className="col-span-2 md:col-span-1 py-4 md:py-8 flex flex-col gap-2.5 max-w-[300px]">
+            <div className="col-span-2 md:col-span-1 py-4 md:py-8 flex flex-col gap-2.5 max-w-[200px]">
               <h3 className="text-base font-semibold mb-2 underline-offset-4 underline">
                 Track
               </h3>
@@ -74,7 +74,14 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
                 <span className="text-xs  font-semibold">
                   Title
                 </span>
-                <h2 className="text-emerald-200">{selectedTrack.name}</h2>
+                <Link
+                  href={selectedTrack.external_urls.spotify}
+                  target="_blank"
+                >
+                  <h2 className="text-emerald-200 font-semibold">
+                    {selectedTrack.name}
+                  </h2>
+                </Link>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs font-semibold">
@@ -118,7 +125,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
                 </p>
               </div>
             </div>
-            <div className="col-span-2 md:col-span-1 py-4 md:py-8 max-w-[300px]">
+            <div className="col-span-2 md:col-span-1 py-4 md:py-8 max-w-[200px]">
               <DisplayTrackAudioFeatues trackID={selectedTrack.id} />
             </div>
           </div>

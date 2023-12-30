@@ -47,7 +47,7 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
       <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute bottom-0 z-40 rounded-md overflow-clip hidden xl:flex" />
       {albumData
         ? (
-          <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll max-h-[400px]">
+          <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll max-h-[400px] pb-6">
             {albumData.items?.map((album: AlbumData, index) => (
               <div
                 key={album.id}

@@ -8,6 +8,7 @@ import { useArtist } from "./ArtistContext";
 
 import { FlameIcon, UsersIcon } from "lucide-react";
 import Image from "next/image";
+import { Artist } from "@/types/SpotifyArtistRelatedArtists";
 
 const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
   const { artistID: contextArtistID, handleRelatedArtistClick } = useArtist();
