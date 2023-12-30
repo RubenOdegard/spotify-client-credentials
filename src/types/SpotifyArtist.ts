@@ -14,16 +14,18 @@ interface Image {
 }
 
 interface SpotifyArtistData {
-  external_urls: ExternalUrls;
-  followers: Followers;
-  genres: string[];
-  href: string;
-  id: string;
-  images: Image[];
-  name: string;
-  popularity: number;
-  type: string;
-  uri: string;
+  artistData: {
+    external_urls: ExternalUrls;
+    followers: Followers;
+    genres: string[];
+    href: string;
+    id: string;
+    images: Image[];
+    name: string;
+    popularity: number;
+    type: string;
+    uri: string;
+  };
 }
 
 export default SpotifyArtistData;

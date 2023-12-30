@@ -1,11 +1,13 @@
 "use client";
 
-import getSpotifyArtist from "@/hooks/getSpotifyArtist";
-import SpotifyAudioFeatures from "@/types/SpotifyAudioFeatures";
+import getSpotifyTrackAudioFeatures from "@/hooks/getSpotifyTrackAudioFeatures";
+import { KeyFormatter, TimeSignatureFormatter } from "@/lib/utils";
 
 const DisplayTrackAudioFeatues = ({ trackID }: { trackID: string }) => {
   const dynamicUrl = `https://api.spotify.com/v1/audio-features/${trackID}`;
-  const { artistData, loading, error } = getSpotifyArtist(dynamicUrl);
+  const { trackAudioFeatures, loading, error } = getSpotifyTrackAudioFeatures(
+    dynamicUrl,
+  );
 
   if (loading) {
     return <p>Loading...</p>;
@@ -16,17 +18,50 @@ const DisplayTrackAudioFeatues = ({ trackID }: { trackID: string }) => {
   }
 
   return (
-    <div className="p-4 w-full ">
-      {artistData
+    <div className="w-full">
+      {trackAudioFeatures
         ? (
-          <>
-            <h2>Track Audio Features</h2>
-            <div className="flex flex-row overflow-x-scroll gap-4 snap snap-x snap-mandatory ">
-              <div className="flex flex-col rounded-lg bg-gray-900 p-4 w-5/6 snap-center max-w-xs truncate">
-                {JSON.stringify(artistData)}
-              </div>
+          <div className="flex flex-col gap-2.5">
+            <h3 className="text-base font-semibold mb-2 underline-offset-4 underline">
+              Track Audio Features
+            </h3>
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-semibold">Key</span>
+              <h2 className="text-emerald-200">
+                {KeyFormatter(trackAudioFeatures.artistData.key)}
+              </h2>
             </div>
-          </>
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-semibold">Time Signature</span>
+              <h2 className="text-emerald-200">
+                {TimeSignatureFormatter(
+                  trackAudioFeatures.artistData.time_signature,
+                )}
+              </h2>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-semibold">Time Signature</span>
+              <h2 className="text-emerald-200">
+                {Math.round(trackAudioFeatures.artistData.tempo)} BPM
+              </h2>
+            </div>
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-semibold">Energy Level</span>
+              <h2 className="text-emerald-200">
+                {trackAudioFeatures.artistData.tempo > 0.5 ? "High" : "Low"}
+              </h2>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-semibold">Danceability</span>
+              <h2 className="text-emerald-200">
+                {trackAudioFeatures.artistData.danceability > 0.45
+                  ? "Danceable"
+                  : "Less danceable"}
+              </h2>
+            </div>
+          </div>
         )
         : <p>No artist data available</p>}
     </div>

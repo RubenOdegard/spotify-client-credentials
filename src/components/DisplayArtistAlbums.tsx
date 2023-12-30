@@ -33,26 +33,25 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
   };
 
   return (
-    <div className=" col-span-12 col-start-1 lg:col-start-9 lg:col-end-13 lg:row-start-1 lg:row-end-1 relative group my-8 lg:my-0">
+    <div className="col-span-12 col-start-1 xl:col-start-9 xl:col-end-13 xl:row-start-1 xl:row-end-1 relative group my-8 xl:my-0">
       {isModalOpen && selectedAlbum && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <h1>Modal</h1>
         </Modal>
       )}
 
-      <h2 className="mb-4 flex items-center gap-2 font-semibold text-foreground ">
+      <h2 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
         <DiscAlbum size={18} className="text-emerald-500" />Albums
       </h2>
 
-      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute bottom-0 z-40 rounded-md overflow-clip hidden lg:flex" />
+      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute bottom-0 z-40 rounded-md overflow-clip hidden xl:flex" />
       {albumData
         ? (
-          <div className="grid grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll h-[400px] pb-6">
+          <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll max-h-[400px]">
             {albumData.items?.map((album: AlbumData, index) => (
-              // biome-ignore lint/a11y/useKeyWithClickEvents: <lazy ignore, redo into a buton later>
               <div
                 key={album.id}
-                className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative border border-emerald-950 max-h-[145px]"
+                className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative border border-emerald-950"
                 onClick={() => handleAlbumClick(album)}
                 onMouseEnter={() => handleAlbumHover(index)}
                 onMouseLeave={() => handleAlbumHover(null)}

@@ -3,7 +3,7 @@ import axios from "axios";
 import SpotifyArtistData from "@/types/SpotifyArtist";
 
 const getSpotifyArtist = (url: string) => {
-  const [artistData, setArtistData] = useState<typeof SpotifyArtistData | null>(
+  const [artistData, setArtistData] = useState<SpotifyArtistData | null>(
     null,
   );
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const getSpotifyArtist = (url: string) => {
       try {
         axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
         const response = await axios.get(`/api/spotify?url=${url}`);
-        const data: typeof SpotifyArtistData = response.data;
+        const data: SpotifyArtistData = response.data;
 
         setArtistData(data);
       } catch (error) {

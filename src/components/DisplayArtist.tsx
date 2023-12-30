@@ -18,7 +18,7 @@ const DisplayArtist = ({ artistID }: { artistID: string }) => {
   }
 
   return (
-    <div className="w-full col-span-12  lg:col-start-1 lg:col-span-4 row-span-1 max-w-[400px] group">
+    <div className="w-full col-span-12  xl:col-start-1 xl:col-span-4 row-span-1 max-w-[400px] group">
       {artistData
         ? (
           <>

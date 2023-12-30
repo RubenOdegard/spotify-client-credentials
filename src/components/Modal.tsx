@@ -1,5 +1,6 @@
 // Modal.tsx
 import React, { ReactNode, useEffect } from "react";
+import { Button } from "./ui/button";
 
 interface ModalProps {
   onClose: () => void;
@@ -24,18 +25,20 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
   }, [onClose]);
 
   return (
-    <div
-      id="modal"
-      className="fixed top-0 left-0 w-full h-full bg-emerald-950 backdrop-blur-sm bg-opacity-75 flex justify-center items-center z-50"
-    >
-      <div className="bg-emerald-700 p-4 rounded-lg shadow-md">
+    <div className="fixed top-0 left-0 w-full h-full bg-background/90 backdrop-blur-md bg-opacity-95 flex justify-center items-center z-50">
+      <div
+        className=" bg-gray-900 backdrop-blur-sm p-6 flex flex-col  max-h-[80dvh] overflow-y-scroll z-50  rounded-md shadow-md border border-emerald-950/80"
+        id="modal"
+      >
         {children}
-        <button
-          className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+        <Button
           onClick={onClose}
+          size="sm"
+          variant="outline"
+          className="mt-4 h-[50px] p-3"
         >
           Close
-        </button>
+        </Button>
       </div>
     </div>
   );
