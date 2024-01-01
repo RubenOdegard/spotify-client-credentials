@@ -27,7 +27,7 @@ interface ExternalUrls {
   spotify: string;
 }
 
-interface Item {
+export interface Item {
   artists: Artist[];
   available_markets: string[];
   disc_number: number;

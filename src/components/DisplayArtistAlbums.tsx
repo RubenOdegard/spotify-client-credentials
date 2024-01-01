@@ -6,6 +6,10 @@ import { AlbumData } from "@/types/SpotifyAlbumData";
 import { DiscAlbum, Music } from "lucide-react";
 import Modal from "./Modal";
 import { useState } from "react";
+import Link from "next/link";
+import DataContainer from "./DataContainer";
+import TitleContainer from "./TitleContainer";
+import DisplayAlbumFeatures from "./DisplayAlbumFeatures";
 
 const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +20,10 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
   const { albumData, loading, error } = getSpotifyAlbumData(dynamicUrl);
 
   if (loading) {
-    return <p className="col-span-3">Loading albums...</p>;
+    return (
+      <span className="col-span-12 row-span-4 xl:col-start-9 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md">
+      </span>
+    );
   }
 
   if (error) {
@@ -32,11 +39,31 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
     setIsModalOpen(true);
   };
 
+  console.log(albumData);
+
   return (
-    <div className="col-span-12 col-start-1 xl:col-start-9 xl:col-end-13 xl:row-start-1 xl:row-end-1 relative group my-8 xl:my-0">
+    <div className="col-span-12 col-start-1 xl:col-start-9 xl:col-end-13 xl:row-start-1 xl:row-end-4 relative group my-8 xl:my-0">
       {isModalOpen && selectedAlbum && (
         <Modal onClose={() => setIsModalOpen(false)}>
-          <h1>Modal</h1>
+          <div className="grid grid-cols-1  gap-x-8 ">
+            <Link
+              href={selectedAlbum.external_urls.spotify}
+              className="col-span-2 place-self-center"
+            >
+              <Image
+                src={selectedAlbum.images[0].url}
+                alt=""
+                quality={25}
+                height={selectedAlbum.images[0].height}
+                width={selectedAlbum.images[0].width}
+                className="aspect-square rounded-md shadow-md border-b border-emerald-900 max-h-[300px] max-w-[300px] mb-4"
+              />
+            </Link>
+
+            <div className="col-span-2 md:col-span-1 py-4 md:py-8 flex flex-col gap-2.5 max-w-[300px]">
+              <DisplayAlbumFeatures selectedAlbum={selectedAlbum} />
+            </div>
+          </div>
         </Modal>
       )}
 
@@ -49,6 +76,7 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
         ? (
           <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll max-h-[400px] pb-6">
             {albumData.items?.map((album: AlbumData, index) => (
+              // biome-ignore lint/a11y/useKeyWithClickEvents: lazy ignore, replace with button?
               <div
                 key={album.id}
                 className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative border border-emerald-950"

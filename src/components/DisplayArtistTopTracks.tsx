@@ -1,17 +1,17 @@
 "use client";
 
-import getSpotifyArtistTopTracks from "@/hooks/getSpotifyArtistTopTracks";
-import Image from "next/image";
-import { useState } from "react";
-
 import Modal from "@/components/Modal";
-
+import getSpotifyArtistTopTracks from "@/hooks/getSpotifyArtistTopTracks";
 import { formatDuration } from "@/lib/utils";
-
 import { Track } from "@/types/SpotifyArtistTopTracks";
 import { Clock3, Disc3 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import DataContainer from "./DataContainer";
 import DisplayTrackAudioFeatues from "./DisplayTrackAudioFeatures";
+import DisplayTrackFeatures from "./DisplayTrackFeatures";
+import TitleContainer from "./TitleContainer";
 
 const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +30,10 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
   );
 
   if (loading) {
-    return <p className="col-span-3">Loading top tracks...</p>;
+    return (
+      <span className="col-span-12 row-span-4 xl:col-start-5 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md">
+      </span>
+    );
   }
 
   if (error) {
@@ -45,12 +48,12 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
   const displayedTracks = artistTopTracks?.artistData?.tracks?.slice(0, 12) ||
     [];
 
-  console.log(displayedTracks[0]);
-
   return (
-    <div className="col-span-12  col-start-1 xl:col-span-3 xl:col-start-5 xl:col-end-9 xl:row-start-1 xl:row-end-1 h-[400px] relative my-8 xl:my-0">
+    <div className="col-span-12  col-start-1 xl:col-span-3 xl:col-start-5 xl:col-end-9 xl:row-start-1 xl:row-end-4 h-[400px] relative my-8 xl:my-0">
+      {/* can be rewritten to conditional component with props to get rid of && */}
       {isModalOpen && selectedTrack && (
         <Modal onClose={() => setIsModalOpen(false)}>
+          {/* Selected Track Image */}
           <div className="grid grid-cols-1 md:grid-cols-2  gap-x-8 ">
             <Link
               href={selectedTrack.album.external_urls.spotify}
@@ -66,64 +69,9 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
               />
             </Link>
 
+            {/* split container for track features and track audio features, 50/50 */}
             <div className="col-span-2 md:col-span-1 py-4 md:py-8 flex flex-col gap-2.5 max-w-[200px]">
-              <h3 className="text-base font-semibold mb-2 underline-offset-4 underline">
-                Track
-              </h3>
-              <div className="flex flex-col gap-0.5 flex-wrap">
-                <span className="text-xs  font-semibold">
-                  Title
-                </span>
-                <Link
-                  href={selectedTrack.external_urls.spotify}
-                  target="_blank"
-                >
-                  <h2 className="text-emerald-200 font-semibold">
-                    {selectedTrack.name}
-                  </h2>
-                </Link>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-semibold">
-                  Artists
-                </span>
-                <p className="flex gap-2 flex-wrap">
-                  {selectedTrack.artists.map((artist, index) => (
-                    <Link
-                      key={artist.id}
-                      href={artist.external_urls.spotify}
-                      target="_blank"
-                      className="text-emerald-200 underline  underline-offset-2 font-semibold"
-                    >
-                      {artist.name}
-                    </Link>
-                  ))}
-                </p>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-semibold ">
-                  Duration
-                </span>
-                <p className="text-emerald-200">
-                  {formatDuration(selectedTrack.duration_ms)}
-                </p>
-              </div>
-              <div className="flex flex-col gap-0.5</div>">
-                <span className="text-xs font-semibold ">
-                  Release
-                </span>
-                <p className="text-emerald-200">
-                  {selectedTrack.album.release_date}
-                </p>
-              </div>
-              <div className="flex flex-col gap-0.5</div>">
-                <span className="text-xs font-semibold ">
-                  Popularity
-                </span>
-                <p className="text-emerald-200">
-                  {selectedTrack.popularity}/100
-                </p>
-              </div>
+              <DisplayTrackFeatures selectedTrack={selectedTrack} />
             </div>
             <div className="col-span-2 md:col-span-1 py-4 md:py-8 max-w-[200px]">
               <DisplayTrackAudioFeatues trackID={selectedTrack.id} />
@@ -132,6 +80,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
         </Modal>
       )}
 
+      {/* Shadow from bottom to top to fade albums longer than container */}
       <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute -bottom-12 z-40 hidden xl:flex" />
 
       <h2 className="mb-4 flex items-center gap-2 font-semibold text-foreground ">
@@ -142,6 +91,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
         ? (
           <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll max-h-[400px] pb-6">
             {displayedTracks.map((track: Track, index) => (
+              // biome-ignore lint/a11y/useKeyWithClickEvents: lazy ignore, replace with button?
               <div
                 key={track.id}
                 className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative cursor-pointer border border-emerald-950"

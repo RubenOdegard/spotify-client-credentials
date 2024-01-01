@@ -41,15 +41,16 @@ Application showcasing working with the Spotify API with
 users.
 
 - [x] Artist Profile Picture
+- [ ] Artist Information
 - [x] Artist Top Tracks
 - [x] Artist Albums
 - [x] Related Artists
 - [x] Details - _selected track_
-- [ ] Details - _selected album_
+- [x] Details - _selected album_
 - [ ] Search implementation
 - [x] Navigate through related artists
 
-## Internal API
+### Internal API
 
 > **/api/spotify**\
 > Fetches data from a specified URL in search params, provided by the hooks
@@ -126,7 +127,7 @@ export async function GET() {
 }
 ```
 
-## Hooks
+### Hooks
 
 > Example from getSpotifyTrackAudioFeatures.ts\
 > Takes a url to fetch as args.
@@ -166,7 +167,7 @@ const getSpotifyAudioFeatures = (url: string) => {
 export default getSpotifyAudioFeatures;
 ```
 
-## Types
+### Types
 
 > Example from SpotifyTrackAudioFeatures.ts
 
@@ -275,7 +276,7 @@ export const formatDuration = (duration_ms: number) => {
 };
 ```
 
-### Visuals
+## Visuals
 
 **Main**\
 ![Main](https://placehold.co/600x400/EEE/31343C)

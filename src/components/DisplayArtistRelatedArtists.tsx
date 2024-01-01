@@ -21,16 +21,18 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
     );
 
   if (loading) {
-    return <p className="col-span-3">Loading related artists...</p>;
+    return (
+      <span className="col-span-12 row-start-5 row-span-1 bg-emerald-950 animate-pulse rounded-md">
+      </span>
+    );
   }
 
   if (error) {
     return <p>{error}</p>;
   }
 
-  console.log(artistRelatedArtists);
   return (
-    <div className="w-full col-span-12 row-start-5 row-span-1 group">
+    <div className="w-full col-span-12 row-start-8 row-span-1 group">
       {artistRelatedArtists
         ? (
           <>
@@ -42,6 +44,7 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
               {artistRelatedArtists.artistData?.artists?.map((
                 artist: Artist,
               ) => (
+                // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div
                   key={artist.id}
                   className="p-4 bg-emerald-950 rounded-md flex flex-col items-center justify-center gap-y-1.5 border border-emerald-950"

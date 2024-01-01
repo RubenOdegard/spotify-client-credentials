@@ -10,7 +10,10 @@ const DisplayArtist = ({ artistID }: { artistID: string }) => {
   );
 
   if (loading) {
-    return <p className="col-span-3">Loading artist...</p>;
+    return (
+      <span className="col-span-12 row-span-4 xl:col-start-1 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md">
+      </span>
+    );
   }
 
   if (error) {
@@ -18,7 +21,7 @@ const DisplayArtist = ({ artistID }: { artistID: string }) => {
   }
 
   return (
-    <div className="w-full col-span-12  xl:col-start-1 xl:col-span-4 row-span-1 max-w-[400px] group">
+    <div className="w-full col-span-12  xl:col-start-1 xl:col-span-4 row-span-4 max-w-[400px] group">
       {artistData
         ? (
           <>

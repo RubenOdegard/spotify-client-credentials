@@ -22,7 +22,6 @@ export const ArtistProvider = ({ children }: { children: ReactNode }) => {
 
   const handleRelatedArtistClick = (newArtistID: string) => {
     setArtistID(newArtistID);
-    console.log(artistID);
   };
 
   return (

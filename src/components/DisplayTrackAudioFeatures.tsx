@@ -2,8 +2,9 @@
 
 import getSpotifyTrackAudioFeatures from "@/hooks/getSpotifyTrackAudioFeatures";
 import { KeyFormatter, TimeSignatureFormatter } from "@/lib/utils";
+import TitleContainer from "./TitleContainer";
 
-const DisplayTrackAudioFeatues = ({ trackID }: { trackID: string }) => {
+const DisplayTrackAudioFeatures = ({ trackID }: { trackID: string }) => {
   const dynamicUrl = `https://api.spotify.com/v1/audio-features/${trackID}`;
   const { trackAudioFeatures, loading, error } = getSpotifyTrackAudioFeatures(
     dynamicUrl,
@@ -22,9 +23,7 @@ const DisplayTrackAudioFeatues = ({ trackID }: { trackID: string }) => {
       {trackAudioFeatures
         ? (
           <div className="flex flex-col gap-2.5">
-            <h3 className="text-base font-semibold mb-2 underline-offset-4 underline">
-              Track Audio Features
-            </h3>
+            <TitleContainer title="Track Audio Features" />
 
             <div className="flex flex-col gap-0.5">
               <span className="text-xs font-semibold">Key</span>
@@ -68,4 +67,4 @@ const DisplayTrackAudioFeatues = ({ trackID }: { trackID: string }) => {
   );
 };
 
-export default DisplayTrackAudioFeatues;
+export default DisplayTrackAudioFeatures;
