@@ -18,8 +18,7 @@
 
 ## Visuals
 
-Gif\
-![Gif](https://s13.i.com/images/Sjt72.md.gif)
+![Gif](https://im2.ezgif.com/tmp/ezgif-2-8e955a6c91.gif)
 
 **Main**\
 ![Main](https://gcdnb.pbrd.co/images/P5tYKDhk0Q1i.png?o=1)
