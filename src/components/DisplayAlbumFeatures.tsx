@@ -4,7 +4,6 @@ import TitleContainer from "./TitleContainer";
 import { Album, Artist } from "@/types/SpotifyAlbumFeatures";
 
 const DisplayAlbumFeatures = ({ selectedAlbum }: Album) => {
-  console.log("Album: ", selectedAlbum);
   return (
     <>
       <TitleContainer title="Album" />

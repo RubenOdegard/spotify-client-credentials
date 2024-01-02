@@ -47,7 +47,7 @@ export interface Track {
     href: string;
     id: string;
     is_local: boolean;
-    is_playable: boolean;
+    is_playable?: boolean;
     name: string;
     popularity: number;
     preview_url: string | null;

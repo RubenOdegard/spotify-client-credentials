@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SpotifyAlbumTracks from "@/types/SpotifyAlbumTracks";
 
-const getSpotifyAlbumData = (url: string) => {
-  const [albumTracks, setAlbumTracks] = useState<
-    typeof SpotifyAlbumTracks | null
-  >(
+const useSpotifyAlbumData = (url: string) => {
+  const [albumTracks, setAlbumTracks] = useState<SpotifyAlbumTracks | null>(
     null,
   );
   const [loading, setLoading] = useState(true);
@@ -15,11 +13,11 @@ const getSpotifyAlbumData = (url: string) => {
     const fetchData = async () => {
       try {
         axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-        const response = await axios.get(`/api/spotify/albums?url=${url}`);
-        const data: typeof SpotifyAlbumTracks = response.data;
+        const response = await axios.get(url);
+        const data: SpotifyAlbumTracks = response.data;
 
         setAlbumTracks(data);
-      } catch (error) {
+      } catch (error: any) {
         setError(`Error fetching album data: ${error.message}`);
       } finally {
         setLoading(false);
@@ -32,4 +30,4 @@ const getSpotifyAlbumData = (url: string) => {
   return { albumTracks, loading, error };
 };
 
-export default getSpotifyAlbumData;
+export default useSpotifyAlbumData;

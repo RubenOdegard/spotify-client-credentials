@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SpotifyArtistData from "@/types/SpotifyArtist";
 
-const getSpotifyArtist = (url: string) => {
-  const [artistData, setArtistData] = useState<SpotifyArtistData | null>(
-    null,
-  );
+const useSpotifyArtist = (url: string) => {
+  const [artistData, setArtistData] = useState<SpotifyArtistData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,7 +15,7 @@ const getSpotifyArtist = (url: string) => {
         const data: SpotifyArtistData = response.data;
 
         setArtistData(data);
-      } catch (error) {
+      } catch (error: any) {
         setError(`Error fetching artist data: ${error.message}`);
       } finally {
         setLoading(false);
@@ -30,4 +28,4 @@ const getSpotifyArtist = (url: string) => {
   return { artistData, loading, error };
 };
 
-export default getSpotifyArtist;
+export default useSpotifyArtist;

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import getSpotifyAlbumData from "@/hooks/getSpotifyAlbumsData";
+import useSpotifyAlbumData from "@/hooks/useSpotifyAlbumData";
 import { AlbumData } from "@/types/SpotifyAlbumData";
 import { DiscAlbum, Music } from "lucide-react";
 import Modal from "./Modal";
@@ -17,12 +17,11 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
   const [selectedAlbum, setSelectedAlbum] = useState<AlbumData | null>(null);
 
   const dynamicUrl = `https://api.spotify.com/v1/artists/${artistID}/albums`;
-  const { albumData, loading, error } = getSpotifyAlbumData(dynamicUrl);
+  const { albumData, loading, error } = useSpotifyAlbumData(dynamicUrl);
 
   if (loading) {
     return (
-      <span className="col-span-12 row-span-4 xl:col-start-9 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md">
-      </span>
+      <span className="col-span-12 row-span-4 xl:col-start-9 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md" />
     );
   }
 
@@ -38,8 +37,6 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
     setSelectedAlbum(Album);
     setIsModalOpen(true);
   };
-
-  console.log(albumData);
 
   return (
     <div className="col-span-12 col-start-1 xl:col-start-9 xl:col-end-13 xl:row-start-1 xl:row-end-4 relative group my-8 xl:my-0">
@@ -68,7 +65,8 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
       )}
 
       <h2 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
-        <DiscAlbum size={18} className="text-emerald-500" />Albums
+        <DiscAlbum size={18} className="text-emerald-500" />
+        Albums
       </h2>
 
       <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute bottom-0 z-40 rounded-md overflow-clip hidden xl:flex" />

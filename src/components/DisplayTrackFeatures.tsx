@@ -2,9 +2,9 @@ import Link from "next/link";
 import DataContainer from "./DataContainer";
 import TitleContainer from "./TitleContainer";
 import { formatDuration } from "@/lib/utils";
-import { Track } from "@/types/SpotifyTrackAudioFeatures";
+import { Track } from "@/types/SpotifyArtistTopTracks";
 
-const DisplayTrackFeatures = ({ selectedTrack }: Track) => {
+const DisplayTrackFeatures = ({ selectedTrack }: { selectedTrack: Track }) => {
   return (
     <>
       <TitleContainer title="Track" />

@@ -6,13 +6,29 @@
 
 ### Table of contents
 
+- [Visuals]()
 - [Running the app]()
 - [Walkthrough]()
   - [Internal API]()
   - [Hooks]()
   - [Types]()
   - [Formatters]()
-- [Visuals]()
+
+---
+
+## Visuals
+
+Gif\
+![Gif](https://s13.i.com/images/Sjt72.md.gif)
+
+**Main**\
+![Main](https://gcdnb.pbrd.co/images/P5tYKDhk0Q1i.png?o=1)
+
+**Track Details**\
+![Track-details](https://gcdnb.pbrd.co/images/fgxvWaqrxvsf.png?o=1)
+
+**Album Details**\
+![Album-Details](https://gcdnb.pbrd.co/images/iCI8UzdAhI6j.png?o=1)
 
 ### Running the app
 
@@ -49,6 +65,8 @@ users.
 - [x] Details - _selected album_
 - [ ] Search implementation
 - [x] Navigate through related artists
+
+- [ ] TODO: Set specific error types, not return any.
 
 ### Internal API
 
@@ -275,14 +293,3 @@ export const formatDuration = (duration_ms: number) => {
   return `${minutes}:${+seconds < 10 ? "0" : ""}${seconds}`;
 };
 ```
-
-## Visuals
-
-**Main**\
-![Main](https://placehold.co/600x400/EEE/31343C)
-
-**Track Details**\
-![Track-details](https://placehold.co/600x400/EEE/31343C)
-
-**Album Details**\
-![Album-Details](https://placehold.co/600x400/EEE/31343C)

@@ -48,13 +48,15 @@ export interface Item {
 }
 
 interface SpotifyAlbumTracks {
-  href: string;
-  limit: number;
-  next: string;
-  offset: number;
-  previous: string;
-  total: number;
-  items: Item[];
+  artistData: {
+    href: string;
+    limit: number;
+    next: string;
+    offset: number;
+    previous: string;
+    total: number;
+    items: Item[];
+  };
 }
 
 export default SpotifyAlbumTracks;

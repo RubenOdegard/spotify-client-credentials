@@ -1,11 +1,11 @@
 "use client";
 
-import getSpotifyAlbumTracks from "@/hooks/getSpotifyAlbumsTracks";
+import useSpotifyAlbumTracks from "@/hooks/useSpotifyAlbumsTracks";
 import SpotifyAlbumTracks, { Item } from "@/types/SpotifyAlbumTracks";
 
 const DisplayArtistAlbums = ({ albumID }: { albumID: string }) => {
   const dynamicUrl = `https://api.spotify.com/v1/albums/${albumID}/tracks`;
-  const { albumTracks, loading, error } = getSpotifyAlbumTracks(dynamicUrl);
+  const { albumTracks, loading, error } = useSpotifyAlbumTracks(dynamicUrl);
 
   if (loading) {
     return <p>Loading...</p>;

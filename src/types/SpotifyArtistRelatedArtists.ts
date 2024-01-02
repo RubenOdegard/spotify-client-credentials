@@ -26,8 +26,8 @@ export interface Artist {
   uri: string;
 }
 
-export interface SpotifyArtistRelatedArtistData {
-  artistsData: {
+export default interface SpotifyArtistRelatedArtistData {
+  artistData: {
     artists: Artist[];
   };
 }

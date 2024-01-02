@@ -1,7 +1,7 @@
 "use client";
 
 import Modal from "@/components/Modal";
-import getSpotifyArtistTopTracks from "@/hooks/getSpotifyArtistTopTracks";
+import useSpotifyArtistTopTracks from "@/hooks/useSpotifyArtistTopTracks";
 import { formatDuration } from "@/lib/utils";
 import { Track } from "@/types/SpotifyArtistTopTracks";
 import { Clock3, Disc3 } from "lucide-react";
@@ -25,14 +25,13 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
   const dynamicUrl =
     `https://api.spotify.com/v1/artists/${artistID}/top-tracks?market=NO`;
 
-  const { artistTopTracks, loading, error } = getSpotifyArtistTopTracks(
+  const { artistTopTracks, loading, error } = useSpotifyArtistTopTracks(
     dynamicUrl,
   );
 
   if (loading) {
     return (
-      <span className="col-span-12 row-span-4 xl:col-start-5 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md">
-      </span>
+      <span className="col-span-12 row-span-4 xl:col-start-5 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md" />
     );
   }
 
@@ -84,7 +83,8 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
       <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute -bottom-12 z-40 hidden xl:flex" />
 
       <h2 className="mb-4 flex items-center gap-2 font-semibold text-foreground ">
-        <Disc3 size={18} className="text-emerald-500" />Top Tracks
+        <Disc3 size={18} className="text-emerald-500" />
+        Top Tracks
       </h2>
 
       {displayedTracks.length > 0

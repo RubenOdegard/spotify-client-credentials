@@ -28,7 +28,8 @@ export async function GET() {
     const accessToken = tokenResponse.data.access_token;
 
     return NextResponse.json({ accessToken });
-  } catch (error) {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  } catch (error: any) {
     console.error("Error fetching access token:", error.message);
     return NextResponse.error();
   }

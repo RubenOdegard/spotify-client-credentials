@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SpotifyArtistRelatedArtist from "@/types/SpotifyArtistRelatedArtists";
 
-const getSpotifyArtistTopTracks = (url: string) => {
+const useSpotifyArtistTopTracks = (url: string) => {
   const [artistRelatedArtists, setArtistRelatedArtists] = useState<
     SpotifyArtistRelatedArtist | null
   >(
@@ -19,7 +19,7 @@ const getSpotifyArtistTopTracks = (url: string) => {
         const data: SpotifyArtistRelatedArtist = response.data;
 
         setArtistRelatedArtists(data);
-      } catch (error) {
+      } catch (error: any) {
         setError(`Error fetching artist data: ${error.message}`);
       } finally {
         setLoading(false);
@@ -32,4 +32,4 @@ const getSpotifyArtistTopTracks = (url: string) => {
   return { artistRelatedArtists, loading, error };
 };
 
-export default getSpotifyArtistTopTracks;
+export default useSpotifyArtistTopTracks;

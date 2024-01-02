@@ -2,12 +2,10 @@ import SpotifyAudioFeatures from "@/types/SpotifyTrackAudioFeatures";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const getSpotifyAudioFeatures = (url: string) => {
+const useSpotifyAudioFeatures = (url: string) => {
   const [trackAudioFeatures, setTrackAudioFeatures] = useState<
     SpotifyAudioFeatures | null
-  >(
-    null,
-  );
+  >(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,7 +17,7 @@ const getSpotifyAudioFeatures = (url: string) => {
         const data: SpotifyAudioFeatures = response.data;
 
         setTrackAudioFeatures(data);
-      } catch (error) {
+      } catch (error: any) {
         setError(`Error fetching artist data: ${error.message}`);
       } finally {
         setLoading(false);
@@ -32,4 +30,4 @@ const getSpotifyAudioFeatures = (url: string) => {
   return { trackAudioFeatures, loading, error };
 };
 
-export default getSpotifyAudioFeatures;
+export default useSpotifyAudioFeatures;
