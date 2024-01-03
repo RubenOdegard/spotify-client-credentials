@@ -1,6 +1,6 @@
 # Spotify Client-Credentials
 
-### Live version: [live-demo](https://spotify-client-credentials.vercel.app/)
+### Live version: [live-demo]()
 
 ---
 
@@ -65,8 +65,6 @@ users.
 - [x] Details - _selected album_
 - [ ] Search implementation
 - [x] Navigate through related artists
-
-- [ ] TODO: Set specific error types, not return any.
 
 ### Internal API
 
