@@ -1,9 +1,7 @@
-> There seems to be bug with the deployment on Vercel, will be debugging at a later date.
-> Local dev works fine.
+> There seems to be bug with the deployment on Vercel, will be debugging at a
+> later date. Local dev works fine.
 
 # Spotify Client-Credentials
-
-### Live version: [live-demo](https://spotify-client-credentials.vercel.app/)
 
 ---
 
@@ -20,8 +18,6 @@
 ---
 
 ## Visuals
-
-![Gif](https://im2.ezgif.com/tmp/ezgif-2-8e955a6c91.gif)
 
 **Main**\
 ![Main](https://gcdnb.pbrd.co/images/P5tYKDhk0Q1i.png?o=1)
@@ -67,6 +63,7 @@ users.
 - [x] Details - _selected album_
 - [ ] Search implementation
 - [x] Navigate through related artists
+- [ ] Save token to local storage and rotate if expired
 
 ### Internal API
 
