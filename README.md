@@ -1,3 +1,6 @@
+> There seems to be bug with the deployment on Vercel, will be debugging at a later date.
+> Local dev works fine.
+
 # Spotify Client-Credentials
 
 ### Live version: [live-demo](https://spotify-client-credentials.vercel.app/)
