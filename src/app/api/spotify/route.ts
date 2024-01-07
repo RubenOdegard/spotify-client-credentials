@@ -9,7 +9,13 @@ export async function GET(request: Request) {
   try {
     axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
     const tokenResponse = await axios.get("/api/token");
-    const accessToken = tokenResponse.data.accessToken;
+
+    const accessToken = tokenResponse.data?.accessToken;
+    if (!accessToken) {
+      return NextResponse.json({ error: "Invalid access token" }, {
+        status: 401,
+      });
+    }
 
     const artistResponse = await axios.get(
       url!,

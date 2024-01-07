@@ -2,9 +2,12 @@ import { ArtistProvider } from "@/components/ArtistContext";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
+import axios from "axios";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL("localhost:3000"),

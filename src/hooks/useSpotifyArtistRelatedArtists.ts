@@ -14,7 +14,6 @@ const useSpotifyArtistTopTracks = (url: string) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
         const response = await axios.get(`/api/spotify?url=${url}`);
         const data: SpotifyArtistRelatedArtist = response.data;
 
