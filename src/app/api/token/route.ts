@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import querystring from "querystring";
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
@@ -9,6 +11,9 @@ export async function GET() {
 
     const base64Credentials = Buffer.from(`${clientId}:${clientSecret}`)
       .toString("base64");
+
+    // debug
+    console.log("Client Credentials Base64: ", base64Credentials);
 
     const payload = querystring.stringify({
       grant_type: "client_credentials",
@@ -27,10 +32,15 @@ export async function GET() {
 
     const accessToken = tokenResponse.data.access_token;
 
+    // debug
+    console.log("Access token from token route: ", accessToken);
+
     return NextResponse.json({ accessToken });
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  } catch (error: any) {
-    console.error("Error fetching access token:", error.message);
-    return NextResponse.error();
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({
+      errorMessage: "Error in token route",
+      error: AxiosError,
+    });
   }
 }
