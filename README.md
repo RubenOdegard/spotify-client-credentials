@@ -1,6 +1,3 @@
-> There seems to be bug with the deployment on Vercel, will be debugging at a
-> later date. Local dev works fine.
-
 # Spotify Client-Credentials
 
 ---
@@ -47,6 +44,12 @@ $ docker run -p 3000:3000 spotify-cc-docker
 ```
 
 ## Walkthrough
+
+> Note: NextJS caches everything as default, so the API routes had to be
+> "force-dynamic" to fetch the correct token on each request. Earlier the
+> previous token would be cached and the newly fetched one would not be used.
+> Took a little debugging to fix, but this line has to persist inside both the
+> _token_ and the _spotify_ api routes.
 
 Application showcasing working with the Spotify API with
 [Client-Credentials](https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow)
