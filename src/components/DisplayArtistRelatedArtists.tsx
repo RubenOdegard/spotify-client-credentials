@@ -38,14 +38,14 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
               <UsersIcon size={18} className="text-emerald-500" />
               Related Artists
             </h2>
-            <div className="snap relative flex cursor-pointer snap-x snap-mandatory flex-row gap-2 overflow-x-scroll pb-2">
+            <div className="relative flex cursor-pointer snap-x snap-proximity flex-row gap-2 overflow-x-scroll pb-2">
               {artistRelatedArtists.artistData?.artists?.map((
                 artist: Artist,
               ) => (
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div
                   key={artist.id}
-                  className="flex flex-col items-center justify-center gap-y-1.5 rounded-md border border-emerald-950 bg-emerald-950 p-4"
+                  className="flex snap-start flex-col items-center justify-center gap-y-1.5 rounded-md border border-emerald-950 bg-emerald-950 p-4"
                   onClick={() => handleRelatedArtistClick(artist.id)}
                 >
                   <div className="relative h-24 w-24">

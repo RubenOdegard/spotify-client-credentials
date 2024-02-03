@@ -84,12 +84,12 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
 
       {displayedTracks.length > 0
         ? (
-          <div className="flex flex-nowrap justify-items-center gap-3 overflow-x-scroll pb-2">
+          <div className="flex snap-x snap-proximity flex-nowrap justify-items-center gap-3 overflow-x-scroll pb-2">
             {displayedTracks.map((track: Track, index) => (
               // biome-ignore lint/a11y/useKeyWithClickEvents: lazy ignore, replace with button?
               <div
                 key={track.id}
-                className="relative flex w-full min-w-[200px] cursor-pointer snap-center flex-col rounded-lg border border-emerald-950 bg-emerald-950"
+                className="relative flex w-full min-w-[200px] cursor-pointer snap-start flex-col rounded-lg border border-emerald-950 bg-emerald-950"
                 onClick={() => handleTrackClick(track)}
                 onMouseEnter={() => handleTrackHover(index)}
                 onMouseLeave={() => handleTrackHover(null)}
