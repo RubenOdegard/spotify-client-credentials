@@ -7,10 +7,10 @@ import DisplayArtistTopTracks from "./DisplayArtistTopTracks";
 import { useArtist } from "./ArtistContext";
 
 const ModuleDisplayContent = () => {
-  const { artistID, handleRelatedArtistClick } = useArtist();
+  const { artistID } = useArtist();
   return (
     <div>
-      <div className="grid grid-cols-12  md:rounded-xl p-4 lg:p-8 mx-2  gap-x-8 gap-y-6 bg-background md:border border-emerald-900 shadow-xl lg:mx-auto min-h-[80dvh]">
+      <div className="grid min-h-[100dvh] grid-cols-12 gap-x-8 gap-y-6 border-emerald-900 bg-background  p-4 shadow-xl md:mx-2 md:min-h-[80dvh] md:rounded-xl md:border lg:mx-auto lg:p-8">
         <DisplayArtist artistID={artistID} />
         <DisplayArtistTopTracks artistID={artistID} />
         <DisplayArtistAlbums artistID={artistID} />
