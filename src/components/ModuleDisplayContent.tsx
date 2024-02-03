@@ -10,7 +10,7 @@ const ModuleDisplayContent = () => {
   const { artistID } = useArtist();
   return (
     <div>
-      <div className="grid min-h-[100dvh] grid-cols-12 gap-x-8 gap-y-6 border-emerald-900 bg-background  p-4 shadow-xl md:mx-2 md:min-h-[80dvh] md:rounded-xl md:border lg:mx-auto lg:p-8">
+      <div className="grid min-h-[100dvh] grid-cols-12 gap-x-8 gap-y-6 border-emerald-900 bg-background/30 p-4 shadow-xl backdrop-blur-sm md:mx-2 md:min-h-[80dvh] md:rounded-xl md:border lg:mx-auto lg:p-8">
         <DisplayArtist artistID={artistID} />
         <DisplayArtistTopTracks artistID={artistID} />
         <DisplayArtistAlbums artistID={artistID} />
