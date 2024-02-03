@@ -8,10 +8,8 @@ import { Clock3, Disc3 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import DataContainer from "./DataContainer";
 import DisplayTrackAudioFeatues from "./DisplayTrackAudioFeatures";
 import DisplayTrackFeatures from "./DisplayTrackFeatures";
-import TitleContainer from "./TitleContainer";
 
 const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +29,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
 
   if (loading) {
     return (
-      <span className="col-span-12 row-span-4 xl:col-start-5 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md" />
+      <span className="col-span-12 row-span-4 max-h-[400px] max-w-[400px]  animate-pulse rounded-md bg-emerald-950 xl:col-span-4 xl:col-start-5" />
     );
   }
 
@@ -48,12 +46,12 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
     [];
 
   return (
-    <div className="col-span-12  col-start-1 xl:col-span-3 xl:col-start-5 xl:col-end-9 xl:row-start-1 xl:row-end-4 h-[400px] relative my-8 xl:my-0">
+    <div className="relative col-span-12 col-start-1">
       {/* can be rewritten to conditional component with props to get rid of && */}
       {isModalOpen && selectedTrack && (
         <Modal onClose={() => setIsModalOpen(false)}>
           {/* Selected Track Image */}
-          <div className="grid grid-cols-1 md:grid-cols-2  gap-x-8 ">
+          <div className="grid grid-cols-1 gap-x-8  md:grid-cols-2 ">
             <Link
               href={selectedTrack.album.external_urls.spotify}
               className="col-span-2 place-self-center"
@@ -64,23 +62,20 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
                 quality={25}
                 height={selectedTrack.album.images[0].height}
                 width={selectedTrack.album.images[0].width}
-                className="aspect-square rounded-md shadow-md border-b border-emerald-900 max-h-[300px] max-w-[300px] mb-4"
+                className="mb-4 aspect-square max-h-[300px] max-w-[300px] rounded-md border-b border-emerald-900 shadow-md"
               />
             </Link>
 
             {/* split container for track features and track audio features, 50/50 */}
-            <div className="col-span-2 md:col-span-1 py-4 md:py-8 flex flex-col gap-2.5 max-w-[200px]">
+            <div className="col-span-2 flex max-w-[200px] flex-col gap-2.5 py-4 md:col-span-1 md:py-8">
               <DisplayTrackFeatures selectedTrack={selectedTrack} />
             </div>
-            <div className="col-span-2 md:col-span-1 py-4 md:py-8 max-w-[200px]">
+            <div className="col-span-2 max-w-[200px] py-4 md:col-span-1 md:py-8">
               <DisplayTrackAudioFeatues trackID={selectedTrack.id} />
             </div>
           </div>
         </Modal>
       )}
-
-      {/* Shadow from bottom to top to fade albums longer than container */}
-      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute -bottom-12 z-40 hidden xl:flex" />
 
       <h2 className="mb-4 flex items-center gap-2 font-semibold text-foreground ">
         <Disc3 size={18} className="text-emerald-500" />
@@ -89,12 +84,12 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
 
       {displayedTracks.length > 0
         ? (
-          <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll max-h-[400px] pb-6">
+          <div className="flex flex-nowrap justify-items-center gap-3 overflow-x-scroll pb-2">
             {displayedTracks.map((track: Track, index) => (
               // biome-ignore lint/a11y/useKeyWithClickEvents: lazy ignore, replace with button?
               <div
                 key={track.id}
-                className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative cursor-pointer border border-emerald-950"
+                className="relative flex w-full min-w-[200px] cursor-pointer snap-center flex-col rounded-lg border border-emerald-950 bg-emerald-950"
                 onClick={() => handleTrackClick(track)}
                 onMouseEnter={() => handleTrackHover(index)}
                 onMouseLeave={() => handleTrackHover(null)}
@@ -106,9 +101,9 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
                     quality={25}
                     height={track.album.images[0].height}
                     width={track.album.images[0].width}
-                    className="aspect-square rounded-md shadow-md border-b border-emerald-900 "
+                    className="aspect-square rounded-md border-b border-emerald-900 shadow-md "
                   />
-                  <p className="text-[0.5em] text-emerald-100 bg-emerald-800/90 border border-emerald-500 rounded-md px-1 py-0.5 absolute top-1 right-1 flex gap-1 justify-center items-center">
+                  <p className="absolute right-1 top-1 flex items-center justify-center gap-1 rounded-md border border-emerald-500 bg-emerald-800/90 px-1 py-0.5 text-[0.7em] text-emerald-100">
                     <Clock3 size={8} /> {formatDuration(track.duration_ms)}
                   </p>
                 </div>
@@ -116,7 +111,7 @@ const DisplayArtistTopTracks = ({ artistID }: { artistID: string }) => {
                 <p
                   className={`text-xs text-center my-2 text-emerald-300 mx-2.5 truncate ${
                     hoveredIndex === index
-                      ? "text-emerald-50 font-semibold underline"
+                      ? "font-semibold text-emerald-50 underline"
                       : ""
                   }`}
                 >

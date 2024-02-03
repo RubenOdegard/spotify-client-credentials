@@ -13,13 +13,15 @@ import { Artist } from "@/types/SpotifyArtistRelatedArtists";
 const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
   const { artistID: contextArtistID, handleRelatedArtistClick } = useArtist();
 
-  const dynamicUrl = `https://api.spotify.com/v1/artists/${artistID}/related-artists`;
+  const dynamicUrl =
+    `https://api.spotify.com/v1/artists/${artistID}/related-artists`;
   const { artistRelatedArtists, loading, error } =
     useSpotifyArtistRelatedArtists(dynamicUrl);
 
   if (loading) {
     return (
-      <span className="col-span-12 row-start-5 row-span-1 bg-emerald-950 animate-pulse rounded-md"></span>
+      <span className="col-span-12 row-span-1 row-start-5 animate-pulse rounded-md bg-emerald-950">
+      </span>
     );
   }
 
@@ -28,54 +30,56 @@ const DisplayArtistRelatedArtist = ({ artistID }: { artistID: string }) => {
   }
 
   return (
-    <div className="w-full col-span-12 row-start-8 row-span-1 group">
-      {artistRelatedArtists ? (
-        <>
-          <h2 className="mb-4 flex items-center gap-2 font-semibold">
-            <UsersIcon size={18} className="text-emerald-500" />
-            Related Artists
-          </h2>
-          <div className="flex flex-row overflow-x-scroll gap-2 snap snap-x snap-mandatory relative cursor-pointer">
-            {artistRelatedArtists.artistData?.artists?.map((artist: Artist) => (
-              // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-              <div
-                key={artist.id}
-                className="p-4 bg-emerald-950 rounded-md flex flex-col items-center justify-center gap-y-1.5 border border-emerald-950"
-                onClick={() => handleRelatedArtistClick(artist.id)}
-              >
-                <div className="h-24 w-24 relative">
-                  <Image
-                    src={artist.images[0].url}
-                    alt=""
-                    quality={25}
-                    height={artist.images[0].height}
-                    width={artist.images[0].width}
-                    className="aspect-square rounded-full border-2 border-emerald-800/20 shadow-inner md:grayscale md:group-hover:grayscale-0 duration-500"
-                  />
-                  <p className="text-[0.6em] absolute top-0 right-0 bg-emerald-800/90 border border-emerald-500 rounded-md px-1 py-0.5">
-                    {nFormatter(artist.followers.total, 1)}
-                  </p>
-                </div>
-
-                <p className="text-xs text-emerald-300 truncate max-w-[15ch]">
-                  {artist.name}
-                </p>
-                <div className="flex gap-1 w-full justify-center items-center relative mt-0.5">
-                  <div className="absolute top-0 -left-[1px] z-40 h-3 w-3 rounded-l-full flex justify-center items-center text-red-800 aspect-square">
-                    <FlameIcon
-                      size={12}
-                      className="ml-1 fill-red-500 text-red-400"
+    <div className="row-start-8 group col-span-12 row-span-1 w-full">
+      {artistRelatedArtists
+        ? (
+          <>
+            <h2 className="mb-4 flex items-center gap-2 font-semibold">
+              <UsersIcon size={18} className="text-emerald-500" />
+              Related Artists
+            </h2>
+            <div className="snap relative flex cursor-pointer snap-x snap-mandatory flex-row gap-2 overflow-x-scroll pb-2">
+              {artistRelatedArtists.artistData?.artists?.map((
+                artist: Artist,
+              ) => (
+                // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+                <div
+                  key={artist.id}
+                  className="flex flex-col items-center justify-center gap-y-1.5 rounded-md border border-emerald-950 bg-emerald-950 p-4"
+                  onClick={() => handleRelatedArtistClick(artist.id)}
+                >
+                  <div className="relative h-24 w-24">
+                    <Image
+                      src={artist.images[0].url}
+                      alt=""
+                      quality={25}
+                      height={artist.images[0].height}
+                      width={artist.images[0].width}
+                      className="aspect-square rounded-full border-2 border-emerald-800/20 shadow-inner duration-500 md:grayscale md:group-hover:grayscale-0"
                     />
-                  </div>{" "}
-                  <Progress value={artist.popularity} />
+                    <p className="absolute right-0 top-0 rounded-md border border-emerald-500 bg-emerald-800/90 px-1 py-0.5 text-[0.6em]">
+                      {nFormatter(artist.followers.total, 1)}
+                    </p>
+                  </div>
+
+                  <p className="max-w-[15ch] truncate text-xs text-emerald-300">
+                    {artist.name}
+                  </p>
+                  <div className="relative mt-0.5 flex w-full items-center justify-center gap-1">
+                    <div className="absolute -left-[1px] top-0 z-40 flex aspect-square h-3 w-3 items-center justify-center rounded-l-full text-red-800">
+                      <FlameIcon
+                        size={12}
+                        className="ml-1 fill-red-500 text-red-400"
+                      />
+                    </div>{" "}
+                    <Progress value={artist.popularity} />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <p>No artist data available</p>
-      )}
+              ))}
+            </div>
+          </>
+        )
+        : <p>No artist data available</p>}
     </div>
   );
 };

@@ -21,7 +21,7 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
 
   if (loading) {
     return (
-      <span className="col-span-12 row-span-4 xl:col-start-9 xl:col-span-4  max-w-[400px] max-h-[400px] bg-emerald-950 animate-pulse rounded-md" />
+      <span className="col-span-12 row-span-4 max-h-[400px] max-w-[400px]  animate-pulse rounded-md bg-emerald-950 xl:col-span-4 xl:col-start-9" />
     );
   }
 
@@ -39,7 +39,7 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
   };
 
   return (
-    <div className="col-span-12 col-start-1 xl:col-start-9 xl:col-end-13 xl:row-start-1 xl:row-end-4 relative group my-8 xl:my-0">
+    <div className="group relative col-span-12 col-start-1">
       {isModalOpen && selectedAlbum && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <div className="grid grid-cols-1  gap-x-8 ">
@@ -53,11 +53,11 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
                 quality={25}
                 height={selectedAlbum.images[0].height}
                 width={selectedAlbum.images[0].width}
-                className="aspect-square rounded-md shadow-md border-b border-emerald-900 max-h-[300px] max-w-[300px] mb-4"
+                className="mb-4 aspect-square max-h-[300px] max-w-[300px] rounded-md border-b border-emerald-900 shadow-md"
               />
             </Link>
 
-            <div className="col-span-2 md:col-span-1 py-4 md:py-8 flex flex-col gap-2.5 max-w-[300px]">
+            <div className="col-span-2 flex max-w-[300px] flex-col gap-2.5 py-4 md:col-span-1 md:py-8">
               <DisplayAlbumFeatures selectedAlbum={selectedAlbum} />
             </div>
           </div>
@@ -69,15 +69,14 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
         Albums
       </h2>
 
-      <div className="h-[50px] w-full bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent absolute bottom-0 z-40 rounded-md overflow-clip hidden xl:flex" />
       {albumData
         ? (
-          <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2.5 justify-items-center overflow-y-scroll max-h-[400px] pb-6">
+          <div className="flex flex-nowrap justify-items-center gap-3 overflow-x-scroll pb-2">
             {albumData.items?.map((album: AlbumData, index) => (
               // biome-ignore lint/a11y/useKeyWithClickEvents: lazy ignore, replace with button?
               <div
                 key={album.id}
-                className="flex flex-col rounded-lg bg-emerald-950 w-full snap-center relative border border-emerald-950"
+                className="relative flex w-full min-w-[200px] cursor-pointer snap-center flex-col rounded-lg border border-emerald-950 bg-emerald-950"
                 onClick={() => handleAlbumClick(album)}
                 onMouseEnter={() => handleAlbumHover(index)}
                 onMouseLeave={() => handleAlbumHover(null)}
@@ -89,9 +88,9 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
                     quality={25}
                     height={album.images[0].height}
                     width={album.images[0].width}
-                    className="aspect-square rounded-md shadow-md border-b border-emerald-900"
+                    className="aspect-square rounded-md border-b border-emerald-900 shadow-md"
                   />
-                  <div className="text-[0.5em] text-emerald-100 bg-emerald-800/90 border border-emerald-500 rounded-md px-1 py-0.5 absolute top-1 right-1 flex gap-1 justify-center items-center">
+                  <div className="absolute right-1 top-1 flex items-center justify-center gap-1 rounded-md border border-emerald-500 bg-emerald-800/90 px-1 py-0.5 text-[0.5em] text-emerald-100">
                     <Music size={8} /> {album.total_tracks}
                   </div>
                 </div>
@@ -99,7 +98,7 @@ const DisplayArtistAlbums = ({ artistID }: { artistID: string }) => {
                 <div
                   className={`text-xs text-center my-2 text-emerald-300 mx-2.5 truncate ${
                     hoveredIndex === index
-                      ? "text-emerald-50 font-semibold underline"
+                      ? "font-semibold text-emerald-50 underline"
                       : ""
                   }`}
                 >
