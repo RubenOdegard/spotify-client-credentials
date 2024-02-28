@@ -33,12 +33,12 @@ const DisplayTrackAudioFeatures = ({ trackID }: { trackID: string }) => {
             <span className="text-xs font-semibold">Time Signature</span>
             <h2 className="text-emerald-200">
               {TimeSignatureFormatter(
-                trackAudioFeatures.artistData.time_signature
+                trackAudioFeatures.artistData.time_signature,
               )}
             </h2>
           </div>
           <div className="flex flex-col gap-0.5">
-            <span className="text-xs font-semibold">Time Signature</span>
+            <span className="text-xs font-semibold">Beats Per Minute</span>
             <h2 className="text-emerald-200">
               {Math.round(trackAudioFeatures.artistData.tempo)} BPM
             </h2>
