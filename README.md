@@ -13,8 +13,7 @@
 
 Application showcasing working with the Spotify API with
 [Client-Credentials](https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow)
-(CC).\
-**CC** gives access to Spotify's data, excluding data directly tied to users.
+(CC). **CC** gives access to Spotify's data, excluding data directly tied to users.
 
 - [x] Artist Profile Picture
 - [x] Artist Information
