@@ -5,42 +5,37 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  try {
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+	try {
+		const clientId = process.env.SPOTIFY_CLIENT_ID;
+		const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
-    const base64Credentials = Buffer.from(`${clientId}:${clientSecret}`)
-      .toString("base64");
+		const base64Credentials = Buffer.from(
+			`${clientId}:${clientSecret}`,
+		).toString("base64");
 
-    // debug
-    console.log("Client Credentials Base64: ", base64Credentials);
+		const payload = querystring.stringify({
+			grant_type: "client_credentials",
+		});
 
-    const payload = querystring.stringify({
-      grant_type: "client_credentials",
-    });
+		const tokenResponse = await axios.post(
+			"https://accounts.spotify.com/api/token",
+			payload,
+			{
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+					Authorization: `Basic ${base64Credentials}`,
+				},
+			},
+		);
 
-    const tokenResponse = await axios.post(
-      "https://accounts.spotify.com/api/token",
-      payload,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Basic ${base64Credentials}`,
-        },
-      },
-    );
+		const accessToken = tokenResponse.data.access_token;
 
-    const accessToken = tokenResponse.data.access_token;
-
-    // debug
-    console.log("Access token from token route: ", accessToken);
-
-    return NextResponse.json({ accessToken });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({
-      errorMessage: "Error in token route",
-      error: AxiosError,
-    });
-  }
+		return NextResponse.json({ accessToken });
+	} catch (error) {
+		console.error(error);
+		return NextResponse.json({
+			errorMessage: "Error in token route",
+			error: AxiosError,
+		});
+	}
 }
