@@ -1,33 +1,38 @@
 # Spotify Client-Credentials
 
----
-
 ### Table of contents
 
-- [Visuals]()
-- [Running the app]()
-- [Walkthrough]()
-  - [Internal API]()
-  - [Hooks]()
-  - [Types]()
-  - [Formatters]()
+- [Introduction](#introduction)
+- [Setup](#setup)
+- [Visuals](#visuals)
+- [Walkthrough](#walkthrough)
+  - [Example Types](#example-types)
+  - [Formatters](#formatters)
+
+## Introduction
+
+Application showcasing working with the Spotify API with
+[Client-Credentials](https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow)
+(CC).\
+**CC** gives access to Spotify's data, excluding data directly tied to users.
+
+- [x] Artist Profile Picture
+- [x] Artist Information
+- [x] Artist Top Tracks
+- [x] Artist Albums
+- [x] Related Artists
+- [x] Details - _selected track_
+- [x] Details - _selected album_
+- [ ] Search implementation
+- [x] Navigate through related artists
+- [ ] Save token to local storage and rotate if expired
 
 ---
 
-## Visuals
-
-**Main**\
-![Main](https://gcdnb.pbrd.co/images/P5tYKDhk0Q1i.png?o=1)
-
-**Track Details**\
-![Track-details](https://gcdnb.pbrd.co/images/fgxvWaqrxvsf.png?o=1)
-
-**Album Details**\
-![Album-Details](https://gcdnb.pbrd.co/images/iCI8UzdAhI6j.png?o=1)
-
-### Running the app
+### Setup
 
 > The application needs the following environment variables in **.env.local**
+> A env.example file is included for reference.
 
 ```
 SPOTIFY_CLIENT_ID=
@@ -43,147 +48,18 @@ $ docker build -t spotify-cc-docker .
 $ docker run -p 3000:3000 spotify-cc-docker
 ```
 
-## Walkthrough
+---
 
-> Note: NextJS caches everything as default, so the API routes had to be
-> "force-dynamic" to fetch the correct token on each request. Earlier the
-> previous token would be cached and the newly fetched one would not be used.
-> Took a little debugging to fix, but this line has to persist inside both the
-> _token_ and the _spotify_ api routes.
+## Visuals
 
-Application showcasing working with the Spotify API with
-[Client-Credentials](https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow)
-(CC).\
-**CC** gives access to Spotify's data, excluding data directly connected to end
-users.
+**Main**\
+![Main](https://gcdnb.pbrd.co/images/P5tYKDhk0Q1i.png?o=1)
 
-- [x] Artist Profile Picture
-- [ ] Artist Information
-- [x] Artist Top Tracks
-- [x] Artist Albums
-- [x] Related Artists
-- [x] Details - _selected track_
-- [x] Details - _selected album_
-- [ ] Search implementation
-- [x] Navigate through related artists
-- [ ] Save token to local storage and rotate if expired
+**Track Details**\
+![Track-details](https://gcdnb.pbrd.co/images/fgxvWaqrxvsf.png?o=1)
 
-### Internal API
-
-> **/api/spotify**\
-> Fetches data from a specified URL in search params, provided by the hooks
-> which takes a URL arg.
-
-```typescript
-import axios from "axios";
-import { NextResponse } from "next/server";
-export const dynamic = "force-dynamic";
-
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const url = searchParams.get("url");
-
-  try {
-    axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-    const tokenResponse = await axios.get("/api/token");
-    const accessToken = tokenResponse.data.accessToken;
-
-    const artistResponse = await axios.get(url!, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const artistData = artistResponse.data;
-
-    return NextResponse.json({ artistData });
-  } catch (error) {
-    return NextResponse.error();
-  }
-}
-```
-
-> **/api/token**\
-> Handles the CLIENT_ID and CLIENT_SECRET and get the token for auth.
-
-```typescript
-import axios from "axios";
-import querystring from "querystring";
-import { NextResponse } from "next/server";
-
-export async function GET() {
-  try {
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
-    const base64Credentials = Buffer.from(
-      `${clientId}:${clientSecret}`,
-    ).toString("base64");
-
-    const payload = querystring.stringify({
-      grant_type: "client_credentials",
-    });
-
-    const tokenResponse = await axios.post(
-      "https://accounts.spotify.com/api/token",
-      payload,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Basic ${base64Credentials}`,
-        },
-      },
-    );
-
-    const accessToken = tokenResponse.data.access_token;
-
-    return NextResponse.json({ accessToken });
-  } catch (error) {
-    console.error("Error fetching access token:", error.message);
-    return NextResponse.error();
-  }
-}
-```
-
-### Hooks
-
-> Example from getSpotifyTrackAudioFeatures.ts\
-> Takes a url to fetch as args.
-
-```typescript
-import SpotifyAudioFeatures from "@/types/SpotifyTrackAudioFeatures";
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-const getSpotifyAudioFeatures = (url: string) => {
-  const [trackAudioFeatures, setTrackAudioFeatures] =
-    useState<SpotifyAudioFeatures | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-        const response = await axios.get(`/api/spotify?url=${url}`);
-        const data: SpotifyAudioFeatures = response.data;
-
-        setTrackAudioFeatures(data);
-      } catch (error) {
-        setError(`Error fetching artist data: ${error.message}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [url]);
-
-  return { trackAudioFeatures, loading, error };
-};
-
-export default getSpotifyAudioFeatures;
-```
+**Album Details**\
+![Album-Details](https://gcdnb.pbrd.co/images/iCI8UzdAhI6j.png?o=1)
 
 ### Types
 
