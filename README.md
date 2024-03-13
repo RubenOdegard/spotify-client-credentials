@@ -31,7 +31,7 @@ Application showcasing working with the Spotify API with
 
 ### Setup
 
-> The application needs the following environment variables in **.env.local**
+> The application needs the following environment variables in **.env.local**  
 > A env.example file is included for reference.
 
 ```
